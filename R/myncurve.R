@@ -6,6 +6,8 @@
 #'
 #' @return list containing mu, sigma, and P(Y <= a)
 #' @export
+#' @importFrom graphics curve polygon
+#' @importFrom stats dnorm pnorm
 #'
 #' @examples
 #' myncurve(mu = 10, sigma = 5, a = 4)
