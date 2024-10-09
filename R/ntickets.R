@@ -33,11 +33,12 @@ ntickets <- function(N, gamma, p) {
   # Solve for nc
   ###########################################
 
-  # Approximation with Y ~ N(np, npq), P(Y <= N) = 1 - gamma
+  # Approximation with Y ~ N(np, npq), P(Y <= N + 0.5) = 1 - gamma
+  # Use a 0.5 endpoint correction to N because we're moving into continuous
   f.continuous <- function(n) {
-    N - qnorm(1 - gamma, # P(Y <= N) = 1 - gamma, N = qnorm(1 - gamma, mean, sd)
+    N + 0.5 - qnorm(1 - gamma, # P(Y <= N + 0.5) = 1 - gamma, N + 0.5 = qnorm(1 - gamma, mean, sd)
               mean = n * p, # mu = np
-              sd = sqrt(n * p * (1 - p))) # var = sd^2 = npq
+              sd = sqrt(n * p * (1 - p))) # var = sd^2 = npq, q = 1 - p
   }
 
   # Optimize continuous function to find when it equals 0 to solve for n
@@ -61,7 +62,8 @@ ntickets <- function(N, gamma, p) {
        curve.discrete(x.discrete), # y
        type = "b", # Plot type = both points and lines
        pch = 16, # Fill in points
-       main = paste0("Objective Vs n to find optimal tickets sold (", n.discrete, "), gamma = ", gamma, ", N = ", N, ", discrete"), # Plot title with interpolated values
+       col = "blue3", # Color of points and lines
+       main = paste0("Objective Vs n to find optimal tickets sold\n(", n.discrete, "), gamma = ", gamma, ", N = ", N, ", discrete"), # Plot title with interpolated values
        ylab = "Objective", # x-axis label
        xlab = "n") # y-axis label
 
@@ -75,15 +77,16 @@ ntickets <- function(N, gamma, p) {
 
   # Function for finding continuous probability of overbooking, varying n
   # Y ~ N(np, npq)
+  # Use a 0.5 endpoint correction to N because we're moving into continuous
   curve.continuous <- function(n) {
-    1 - pnorm(N, mean = n * p, sd = sqrt(n * p * (1 - p))) # P(Y > N) = 1 - P(Y <= N)
+    1 - pnorm(N + 0.5, mean = n * p, sd = sqrt(n * p * (1 - p))) # P(Y > N + 0.5) = 1 - P(Y <= N + 0.5)
   }
 
   # Continuous curve
   curve(curve.continuous(x), # f(x)
         from = N, # Lower limit of x
         to = 1.1 * N, # Upper limit of x
-        main = paste0("Objective Vs n to find optimal tickets sold (", round(n.continuous, 4), "), gamma = ", gamma, ", N = ", N, ", continuous"), # Plot title with interpolated values
+        main = paste0("Objective Vs n to find optimal tickets sold\n(", round(n.continuous, 4), "), gamma = ", gamma, ", N = ", N, ", continuous"), # Plot title with interpolated values
         ylab = "Objective", # x-axis label
         xlab = "n") # y-axis label
 
