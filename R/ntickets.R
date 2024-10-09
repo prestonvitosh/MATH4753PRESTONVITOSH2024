@@ -29,6 +29,7 @@ ntickets <- function(N, gamma, p) {
   # Since discrete, truncate floating point. E.g., if the optimization returns 109.7, sell 109 tickets to have no more than gamma chance of overbooking
   n.discrete <- floor(n.discrete) # Floor rounds down positive numbers
 
+
   ###########################################
   # Solve for nc
   ###########################################
@@ -43,6 +44,7 @@ ntickets <- function(N, gamma, p) {
 
   # Optimize continuous function to find when it equals 0 to solve for n
   n.continuous <- uniroot(f.continuous, lower = N, upper = N * 2)$root
+
 
   ###########################################
   # Discrete graph
@@ -71,6 +73,7 @@ ntickets <- function(N, gamma, p) {
   abline(v = n.discrete, col = "red", lwd = 2) # Vertical line at x = nc, line thickened with lwd
   abline(h = curve.discrete(n.discrete), col = "red", lwd = 2) # Horizontal line at y = f(nc), line thickened with lwd
 
+
   ###########################################
   # Continuous graph
   ###########################################
@@ -93,6 +96,7 @@ ntickets <- function(N, gamma, p) {
   # Add vertical line and horizontal line intersecting at (nc, f(nc))
   abline(v = n.continuous, col = "blue") # Vertical blue line at x = nc
   abline(h = curve.continuous(n.continuous), col = "blue") # Horizontal blue line at y = f(nc)
+
 
   ###########################################
   # Print named list
