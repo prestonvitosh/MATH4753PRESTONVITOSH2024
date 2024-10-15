@@ -85,6 +85,9 @@ ntickets <- function(N, gamma, p) {
     1 - pnorm(N + 0.5, mean = n * p, sd = sqrt(n * p * (1 - p))) # P(Y > N + 0.5) = 1 - P(Y <= N + 0.5)
   }
 
+  # Declare x variable
+  x <- NULL
+
   # Continuous curve
   curve(curve.continuous(x), # f(x)
         from = N, # Lower limit of x
