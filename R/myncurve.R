@@ -12,6 +12,9 @@
 #' @examples
 #' myncurve(mu = 10, sigma = 5, a = 4)
 myncurve <- function(mu, sigma, a) {
+  # Declare x variable
+  x <- NULL
+
   # Plot Density:
   curve(dnorm(x, mean = mu, sd = sigma), # Normal distribution density function
         xlim = c(mu - 3 * sigma, mu + 3 * sigma), # xlim adjusted to include mu +- 3 * sigma
