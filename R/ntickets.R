@@ -38,8 +38,8 @@ ntickets <- function(N, gamma, p) {
   # Use a 0.5 endpoint correction to N because we're moving into continuous
   f.continuous <- function(n) {
     N + 0.5 - qnorm(1 - gamma, # P(Y <= N + 0.5) = 1 - gamma, N + 0.5 = qnorm(1 - gamma, mean, sd)
-              mean = n * p, # mu = np
-              sd = sqrt(n * p * (1 - p))) # var = sd^2 = npq, q = 1 - p
+                    mean = n * p, # mu = np
+                    sd = sqrt(n * p * (1 - p))) # var = sd^2 = npq, q = 1 - p
   }
 
   # Optimize continuous function to find when it equals 0 to solve for n
