@@ -36,7 +36,7 @@ mycltu <- function(n, iter, a = 0, b = 10) {
   ymax <- 1.1 * ymax
 
   ## Now we can make the histogram
-  hist(w, freq = FALSE, ylim = c(0, ymax), main = paste("Histogram of Sample Mean\nSample Size = ", n), xlab = "Sample Mean")
+  hist(w, freq = FALSE, ylim = c(0, ymax), main = paste0("Histogram of Sample Mean\nSample Size = ", n), xlab = "Sample Mean")
 
   ## Add a density curve made from the sample distribution
   lines(density(w), col = "blue", lwd = 3) # add a density plot
