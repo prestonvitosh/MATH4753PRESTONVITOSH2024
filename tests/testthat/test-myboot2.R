@@ -1,4 +1,4 @@
-test_that("returned vector has correct length", {
+test_that("returned list has appropriate items", {
   # Test 1:
   iter <- 10000
   x <- rnorm(25, mean = 25, sd = 10)
