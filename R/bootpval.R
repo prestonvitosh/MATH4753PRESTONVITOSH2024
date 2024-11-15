@@ -45,17 +45,17 @@ bootpval <- function(x, conf.level = 0.95, iter = 3000, mu0 = 0, test = "two") {
   if (test == "two") {
     ncoll <- length(mid[mid <= -abs(tcalc)])
     ncolr <- length(mid[mid >= abs(tcalc)])
-    col <- c(rep("Green", ncoll), rep("Gray", length(mid) - ncoll - ncolr), rep("Green", ncolr))
+    col <- c(rep("green", ncoll), rep("gray", length(mid) - ncoll - ncolr), rep("green", ncolr))
   }
 
   if (test == "upper") {
     ncolr <- length(mid[mid >= abs(tcalc)])
-    col <- c(rep("Gray", length(mid) - ncolr), rep("Green", ncolr))
+    col <- c(rep("gray", length(mid) - ncolr), rep("green", ncolr))
   }
 
   if (test == "lower") {
     ncoll <- length(mid[mid <= -abs(tcalc)])
-    col <- c(rep("Green", ncoll), rep("Gray", length(mid) - ncoll))
+    col <- c(rep("green", ncoll), rep("gray", length(mid) - ncoll))
   }
 
   hist(ytstat, col = col, freq = FALSE, las = 1, main = "", xlab = expression(T[stat]))
